@@ -9948,13 +9948,6 @@ static bool VULKAN_INTERNAL_AcquireSwapchainTexture(
         }
     }
 
-    if (swapchainTextureWidth) {
-        *swapchainTextureWidth = windowData->width;
-    }
-    if (swapchainTextureHeight) {
-        *swapchainTextureHeight = windowData->height;
-    }
-
     if (windowData->inFlightFences[windowData->frameCounter] != NULL) {
         if (block) {
             // If we are blocking, just wait for the fence!
@@ -10004,6 +9997,14 @@ static bool VULKAN_INTERNAL_AcquireSwapchainTexture(
             // Edge case, texture is filled in with NULL but not an error
             return true;
         }
+    }
+
+    if (swapchainTextureWidth) {
+        *swapchainTextureWidth = windowData->width;
+    }
+
+    if (swapchainTextureHeight) {
+        *swapchainTextureHeight = windowData->height;
     }
 
     swapchainTextureContainer = &windowData->textureContainers[swapchainImageIndex];
